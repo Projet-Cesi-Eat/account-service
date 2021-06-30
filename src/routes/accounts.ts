@@ -1,36 +1,58 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import { AccountsService } from '../controllers/accountsController';
+import { UsersService } from '../controllers/usersController';
+import { CitiesService } from '../controllers/citiesController';
+import { RolesService } from '../controllers/rolesController';
 
 const routerSQL = express.Router();
-const accountsService = new AccountsService();
+
+const usersService = new UsersService();
+const citiesService = new CitiesService();
+const rolesService = new RolesService();
 
 /**
- * TODO: TO DELETE
+ * User functionalities
  */
-/* routerSQL.get('/', (req: Request, res: Response) => {
-  accountsService.getAllUsers(req, res);
-}); */
-
-/**
- * TODO: TO DELETE
- */
-routerSQL.post('/', (req: Request, res: Response) => {
-  accountsService.createNewUser(req, res);
+routerSQL.get('/user/', (req: Request, res: Response) => {
+  usersService.getOneUser(req, res);
+});
+routerSQL.get('/user/email/', (req: Request, res: Response) => {
+  usersService.getUserWithEmail(req, res);
+});
+routerSQL.put('/user/', (req: Request, res: Response) => {
+  usersService.updateUser(req, res);
 });
 
 /**
- * TODO: TO DELETE
+ * Roles functionalities
  */
-routerSQL.get('/', (req: Request, res: Response) => {
-  accountsService.getUser(req, res);
+routerSQL.get('/role/all/', (req: Request, res: Response) => {
+  rolesService.getAllRoles(req, res);
+});
+routerSQL.get('/role/one/', (req: Request, res: Response) => {
+  rolesService.getOneRole(req, res);
+});
+routerSQL.post('/role/', (req: Request, res: Response) => {
+  rolesService.createNewRole(req, res);
+});
+routerSQL.put('/role/', (req: Request, res: Response) => {
+  rolesService.updateRole(req, res);
 });
 
 /**
- * Update user data ✅
+ * Cities functionalities
  */
-routerSQL.put('/', (req: Request, res: Response) => {
-  accountsService.updateUser(req, res);
+routerSQL.get('/city/all/', (req: Request, res: Response) => {
+  citiesService.getAllCities(req, res);
+});
+routerSQL.get('/city/one/', (req: Request, res: Response) => {
+  citiesService.getOneCity(req, res);
+});
+routerSQL.post('/city/', (req: Request, res: Response) => {
+  citiesService.createNewCity(req, res);
+});
+routerSQL.put('/city/', (req: Request, res: Response) => {
+  citiesService.updateCity(req, res);
 });
 
 module.exports = routerSQL;
